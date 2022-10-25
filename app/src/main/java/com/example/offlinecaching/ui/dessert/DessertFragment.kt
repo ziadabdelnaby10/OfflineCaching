@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.offlinecaching.databinding.FragmentHomeBinding
+import com.example.offlinecaching.databinding.FragmentDessertBinding
 
 class DessertFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentDessertBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -25,10 +25,10 @@ class DessertFragment : Fragment() {
         val homeViewModel =
             ViewModelProvider(this).get(DessertViewModel::class.java)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentDessertBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
+        val textView: TextView = binding.textGallery
         homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }

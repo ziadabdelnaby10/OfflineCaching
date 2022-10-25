@@ -6,27 +6,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.example.offlinecaching.R
+import com.example.offlinecaching.databinding.FragmentRestaurantBinding
 
 class RestaurantFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = RestaurantFragment()
-    }
-
-    private lateinit var viewModel: RestaurantViewModel
+    //private var viewModel: RestaurantViewModel by viewModels()
+    lateinit var binding : FragmentRestaurantBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_restaurant, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(RestaurantViewModel::class.java)
-        // TODO: Use the ViewModel
+        binding = FragmentRestaurantBinding.inflate(inflater , container , false)
+        return binding.root
     }
 
 }
