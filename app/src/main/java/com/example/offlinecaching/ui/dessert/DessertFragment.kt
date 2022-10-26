@@ -4,39 +4,36 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import com.example.offlinecaching.adapter.DessertOnClickListener
+import com.example.offlinecaching.adapter.DessertRecyclerAdapter
 import com.example.offlinecaching.databinding.FragmentDessertBinding
+import com.example.offlinecaching.model.Dessert
+import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
 
-class DessertFragment : Fragment() {
+@AndroidEntryPoint
+class DessertFragment : Fragment(), DessertOnClickListener {
 
-    private var _binding: FragmentDessertBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private lateinit var _binding: FragmentDessertBinding
+    private val viewModel: DessertViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(DessertViewModel::class.java)
-
         _binding = FragmentDessertBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textGallery
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        val adapter = DessertRecyclerAdapter(this)
+        _binding.viewModel = viewModel
+        _binding.lifecycleOwner = viewLifecycleOwner
+        _binding.recyclerView.adapter = adapter
+        return _binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onClick(position: Int, item: Dessert) {
+        Toast.makeText(requireContext(), item.toString(), Toast.LENGTH_SHORT).show()
     }
 }

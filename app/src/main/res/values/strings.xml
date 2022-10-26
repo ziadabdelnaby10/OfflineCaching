@@ -12,4 +12,9 @@
     <string name="menu_dessert">Dessert</string>
     <string name="menu_food">Food</string>
     <string name="menu_restaurant">Restaurant</string>
+
+    <!--    Dessert   -->
+    <string name="variety">Variety</string>
+    <string name="topping">Topping</string>
+    <string name="flavor">Flavor</string>
 </resources>
