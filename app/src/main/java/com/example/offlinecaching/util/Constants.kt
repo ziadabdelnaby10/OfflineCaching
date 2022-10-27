@@ -7,5 +7,8 @@ object Constants {
     const val FOOD_PATH = "food/random_food"
     const val RESTAURANT_PATH = "restaurant/random_restaurant"
     const val DESSERT_TABLE = "dessert"
+    const val FOOD_TABLE = "food"
+    const val COFFEE_TABLE = "coffee"
+    const val RESTAURANT_TABLE = "restaurant"
     const val APP_DATABASE = "main-database"
 }

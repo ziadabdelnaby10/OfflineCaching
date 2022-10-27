@@ -1,13 +1,13 @@
 package com.example.offlinecaching.ui.coffee
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import com.example.offlinecaching.data.repo.CoffeeRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class CoffeeViewModel : ViewModel() {
+@HiltViewModel
+class CoffeeViewModel @Inject constructor(repository: CoffeeRepository) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is gallery Fragment"
-    }
-    val text: LiveData<String> = _text
+    val coffeeLiveData = repository.getCoffee().asLiveData()
 }

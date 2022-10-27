@@ -1,28 +1,28 @@
 package com.example.offlinecaching.data.repo
 
 import androidx.room.withTransaction
-import com.example.offlinecaching.data.api.DessertServices
+import com.example.offlinecaching.data.api.CoffeeServices
 import com.example.offlinecaching.data.database.AppDatabase
 import com.example.offlinecaching.util.networkBoundResource
 import javax.inject.Inject
 
-class DessertRepository @Inject constructor(
-    private val api: DessertServices,
+class CoffeeRepository @Inject constructor(
+    private val api: CoffeeServices,
     private val db: AppDatabase
 ) {
-    private val dessertDao = db.dessertDao()
+    private val coffeeDao = db.coffeeDao()
 
-    fun getDessert() = networkBoundResource(
+    fun getCoffee() = networkBoundResource(
         query = {
-            dessertDao.getAllData()
+            coffeeDao.getAllData()
         },
         fetch = {
-            api.getDessertsAsync(30).await()
+            api.getCoffeeAsync(30).await()
         },
         saveFetchResult = { desserts ->
             db.withTransaction {
-                dessertDao.deleteAll()
-                dessertDao.insertData(desserts)
+                coffeeDao.deleteAll()
+                coffeeDao.insertData(desserts)
             }
         }
     )

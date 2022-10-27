@@ -4,18 +4,18 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.offlinecaching.model.Dessert
+import com.example.offlinecaching.model.Restaurant
 import com.example.offlinecaching.util.Constants
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface DessertDao {
+interface RestaurantDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertData(list: List<Dessert>)
+    suspend fun insertData(list: List<Restaurant>)
 
-    @Query("DELETE FROM ${Constants.DESSERT_TABLE}")
+    @Query("DELETE FROM ${Constants.RESTAURANT_TABLE}")
     suspend fun deleteAll()
 
-    @Query("SELECT * FROM ${Constants.DESSERT_TABLE}")
-    fun getAllData(): Flow<List<Dessert>>
+    @Query("SELECT * FROM ${Constants.RESTAURANT_TABLE}")
+    fun getAllData(): Flow<List<Restaurant>>
 }

@@ -17,4 +17,12 @@
     <string name="variety">Variety</string>
     <string name="topping">Topping</string>
     <string name="flavor">Flavor</string>
+    <string name="dish">Dish</string>
+    <string name="ingredient">Ingredient</string>
+    <string name="measurement">Measurement</string>
+    <string name="description">Description</string>
+    <string name="blend_name">Blend Name</string>
+    <string name="origin">Origin</string>
+    <string name="intensifier">Intensifier</string>
+    <string name="notes">Notes</string>
 </resources>

@@ -4,39 +4,36 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import com.example.offlinecaching.adapter.FoodOnClickListener
+import com.example.offlinecaching.adapter.FoodRecyclerAdapter
 import com.example.offlinecaching.databinding.FragmentFoodBinding
+import com.example.offlinecaching.model.Food
+import dagger.hilt.android.AndroidEntryPoint
 
-class FoodFragment : Fragment() {
+@AndroidEntryPoint
+class FoodFragment : Fragment(), FoodOnClickListener {
 
-    private var _binding: FragmentFoodBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private lateinit var _binding: FragmentFoodBinding
+    private val viewModel: FoodViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val slideshowViewModel =
-            ViewModelProvider(this).get(FoodViewModel::class.java)
-
         _binding = FragmentFoodBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        val adapter = FoodRecyclerAdapter(this)
+        _binding.viewModel = viewModel
+        _binding.lifecycleOwner = viewLifecycleOwner
+        _binding.recyclerView.adapter = adapter
 
-        val textView: TextView = binding.textSlideshow
-        slideshowViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        return _binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onClick(position: Int, item: Food) {
+        Toast.makeText(requireContext(), item.toString(), Toast.LENGTH_SHORT).show()
     }
 }

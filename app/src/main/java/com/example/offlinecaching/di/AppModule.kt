@@ -2,8 +2,11 @@ package com.example.offlinecaching.di
 
 import android.app.Application
 import androidx.room.Room
+import com.example.offlinecaching.data.api.CoffeeServices
 import com.example.offlinecaching.data.api.DessertServices
-import com.example.offlinecaching.data.database.DessertDatabase
+import com.example.offlinecaching.data.api.FoodServices
+import com.example.offlinecaching.data.api.RestaurantServices
+import com.example.offlinecaching.data.database.AppDatabase
 import com.example.offlinecaching.util.Constants
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
@@ -40,6 +43,21 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideDatabase(app: Application): DessertDatabase =
-        Room.databaseBuilder(app, DessertDatabase::class.java, Constants.APP_DATABASE).build()
+    fun provideFoodService(retrofit: Retrofit): FoodServices =
+        retrofit.create(FoodServices::class.java)
+
+    @Provides
+    @Singleton
+    fun provideCoffeeService(retrofit: Retrofit): CoffeeServices =
+        retrofit.create(CoffeeServices::class.java)
+
+    @Provides
+    @Singleton
+    fun provideRestaurantService(retrofit: Retrofit): RestaurantServices =
+        retrofit.create(RestaurantServices::class.java)
+
+    @Provides
+    @Singleton
+    fun provideDatabase(app: Application): AppDatabase =
+        Room.databaseBuilder(app, AppDatabase::class.java, Constants.APP_DATABASE).build()
 }

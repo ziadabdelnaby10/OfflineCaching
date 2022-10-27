@@ -11,7 +11,6 @@ import com.example.offlinecaching.adapter.DessertOnClickListener
 import com.example.offlinecaching.adapter.DessertRecyclerAdapter
 import com.example.offlinecaching.databinding.FragmentDessertBinding
 import com.example.offlinecaching.model.Dessert
-import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
